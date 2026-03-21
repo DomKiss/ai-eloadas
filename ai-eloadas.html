@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesterséges Intelligencia — AI Előadás 2026</title>
+
+    <!-- Fonts: JetBrains Mono for terminal feel + Clash Display for impact -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES (THEME)
+           Neon Cyber bg + Terminal aesthetic
+           =========================================== */
+        :root {
+            /* Colors */
+            --bg-primary: #0a0f1c;
+            --bg-terminal: #0d1117;
+            --bg-terminal-header: #161b22;
+            --border-terminal: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #484f58;
+            --accent-cyan: #00ffcc;
+            --accent-magenta: #ff00aa;
+            --accent-green: #39d353;
+            --accent-blue: #58a6ff;
+            --accent-purple: #d2a8ff;
+            --accent-orange: #ffa657;
+            --accent-red: #ff7b72;
+            --accent-yellow: #e3b341;
+
+            /* Typography — clamp() for responsive */
+            --font-display: 'Clash Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --title-size: clamp(2rem, 6vw, 5rem);
+            --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+            --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+            --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+            --small-size: clamp(0.65rem, 1vw, 0.875rem);
+            --code-size: clamp(0.7rem, 1.3vw, 0.95rem);
+
+            /* Spacing */
+            --slide-padding: clamp(1.5rem, 4vw, 4rem);
+            --content-gap: clamp(0.5rem, 2vw, 2rem);
+            --element-gap: clamp(0.25rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* ===========================================
+           BASE RESET
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ===========================================
+           VIEWPORT FITTING: MANDATORY BASE STYLES
+           =========================================== */
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+
+        .feature-list, .bullet-list {
+            gap: clamp(0.4rem, 1vh, 1rem);
+        }
+
+        .feature-list li, .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.4;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        img, .image-container {
+            max-width: 100%;
+            max-height: min(50vh, 400px);
+            object-fit: contain;
+        }
+
+        /* Short viewports */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 3vw, 2rem);
+                --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+                --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+                --h2-size: clamp(1rem, 3vw, 1.75rem);
+            }
+        }
+
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.1rem, 4vw, 2rem);
+                --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative {
+                display: none;
+            }
+        }
+
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.4rem, 2vw, 1rem);
+                --title-size: clamp(1rem, 3.5vw, 1.5rem);
+                --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+                --body-size: clamp(0.65rem, 1vw, 0.85rem);
+            }
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --title-size: clamp(1.25rem, 7vw, 2.5rem);
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* ===========================================
+           GLOBAL BACKGROUND — NEON CYBER
+           =========================================== */
+        body {
+            background: var(--bg-primary);
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        /* Animated grid — repeats on every slide */
+        .cyber-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,255,204,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,204,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating neon orbs for depth */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-cyan {
+            width: clamp(200px, 30vw, 400px);
+            height: clamp(200px, 30vw, 400px);
+            background: var(--accent-cyan);
+            opacity: 0.12;
+            animation: orbFloat 10s ease-in-out infinite;
+        }
+
+        .orb-magenta {
+            width: clamp(150px, 25vw, 350px);
+            height: clamp(150px, 25vw, 350px);
+            background: var(--accent-magenta);
+            opacity: 0.1;
+            animation: orbFloat 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(15px, -20px) scale(1.05); }
+            66% { transform: translate(-10px, 15px) scale(0.95); }
+        }
+
+        /* ===========================================
+           TERMINAL WINDOW COMPONENT
+           Reusable terminal card
+           =========================================== */
+        .terminal {
+            background: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 0 40px rgba(0,255,204,0.06),
+                0 16px 48px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: clamp(8px, 1.2vh, 14px) clamp(12px, 1.5vw, 18px);
+            background: var(--bg-terminal-header);
+            border-bottom: 1px solid var(--border-terminal);
+        }
+
+        .terminal-dot {
+            width: clamp(8px, 1.2vw, 12px);
+            height: clamp(8px, 1.2vw, 12px);
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .terminal-body {
+            padding: clamp(1rem, 2.5vw, 2rem) clamp(1.2rem, 3vw, 2.5rem);
+        }
+
+        .terminal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: clamp(6px, 1vh, 10px) clamp(12px, 1.5vw, 18px);
+            background: var(--bg-terminal-header);
+            border-top: 1px solid var(--border-terminal);
+            font-size: clamp(0.5rem, 0.9vw, 0.7rem);
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            color: var(--accent-green);
+        }
+
+        /* Terminal text styles */
+        .prompt { color: var(--accent-green); }
+        .comment { color: var(--text-secondary); }
+        .string { color: var(--accent-blue); }
+        .keyword { color: var(--accent-red); }
+        .func { color: var(--accent-purple); }
+        .flag { color: var(--accent-orange); }
+
+        /* Blinking cursor */
+        .cursor {
+            display: inline-block;
+            width: 0.55em;
+            height: 1.15em;
+            background: var(--accent-green);
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* CRT scanlines overlay */
+        .scanlines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.08) 2px,
+                rgba(0,0,0,0.08) 4px
+            );
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        /* ===========================================
+           REVEAL ANIMATIONS
+           Triggered by IntersectionObserver
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+
+        /* Terminal boot animation */
+        .terminal-boot {
+            opacity: 0;
+            transform: scale(0.96);
+            transition: opacity 0.8s var(--ease-out-expo),
+                        transform 0.8s var(--ease-out-expo);
+        }
+
+        .slide.visible .terminal-boot {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Line-by-line type reveal */
+        .type-line {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .slide.visible .type-line {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.visible .type-line:nth-child(1) { transition-delay: 0.3s; }
+        .slide.visible .type-line:nth-child(2) { transition-delay: 0.6s; }
+        .slide.visible .type-line:nth-child(3) { transition-delay: 0.9s; }
+        .slide.visible .type-line:nth-child(4) { transition-delay: 1.2s; }
+        .slide.visible .type-line:nth-child(5) { transition-delay: 1.5s; }
+        .slide.visible .type-line:nth-child(6) { transition-delay: 1.8s; }
+        .slide.visible .type-line:nth-child(7) { transition-delay: 2.1s; }
+        .slide.visible .type-line:nth-child(8) { transition-delay: 2.4s; }
+        .slide.visible .type-line:nth-child(9) { transition-delay: 2.7s; }
+
+        /* ===========================================
+           SLIDE 1: TITLE / COVER
+           =========================================== */
+        .slide-title {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-title .terminal {
+            width: min(90vw, 800px);
+        }
+
+        .title-display {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5.5vw, 4.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+        }
+
+        .title-display .glow {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(0,255,204,0.3));
+        }
+
+        .title-badge {
+            display: inline-block;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: var(--small-size);
+            padding: 0.3em 1em;
+            border-radius: 50px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(0,255,204,0.1); }
+            50% { box-shadow: 0 0 20px rgba(0,255,204,0.25), 0 0 40px rgba(0,255,204,0.1); }
+        }
+
+        .title-subtitle {
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            margin-top: clamp(0.5rem, 1vh, 1rem);
+            letter-spacing: 0.05em;
+        }
+
+        /* ===========================================
+           SLIDE 2: ABOUT ME
+           =========================================== */
+        .slide-about .slide-content {
+            align-items: center;
+        }
+
+        .slide-about .terminal {
+            width: min(90vw, 850px);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1rem, 2vw, 2rem);
+            margin-top: clamp(0.5rem, 1.5vh, 1rem);
+        }
+
+        @media (max-width: 700px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-section-title {
+            font-size: var(--small-size);
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);
+            font-weight: 700;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(0.4rem, 0.8vw, 0.7rem);
+        }
+
+        .social-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4em;
+            padding: 0.3em 0.8em;
+            border: 1px solid var(--border-terminal);
+            border-radius: 6px;
+            font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.03);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .social-badge:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0,255,204,0.15);
+        }
+
+        .social-icon {
+            font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+        }
+
+        .about-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.3rem, 0.6vh, 0.5rem);
+        }
+
+        .about-list li {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            padding-left: 1.2em;
+            position: relative;
+        }
+
+        .about-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        .about-highlight {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        /* ===========================================
+           SLIDE 3: LIVE DEMO PROMPT
+           =========================================== */
+        .slide-demo .slide-content {
+            align-items: center;
+        }
+
+        .slide-demo .terminal {
+            width: min(90vw, 850px);
+        }
+
+        .demo-prompt-text {
+            font-size: var(--code-size);
+            line-height: 1.6;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .demo-label {
+            display: inline-block;
+            background: var(--accent-magenta);
+            color: #fff;
+            font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+            font-weight: 700;
+            padding: 0.2em 0.8em;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: clamp(0.5rem, 1vh, 1rem);
+        }
+
+        .demo-hint {
+            margin-top: clamp(0.5rem, 1.2vh, 1rem);
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* ===========================================
+           SLIDE 4: BILLIONAIRES — OPPORTUNITY
+           =========================================== */
+        .slide-opportunity .slide-content {
+            align-items: center;
+        }
+
+        .slide-opportunity .terminal {
+            width: min(90vw, 900px);
+        }
+
+        .billionaires-row {
+            display: flex;
+            justify-content: center;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            margin: clamp(0.8rem, 2vh, 1.5rem) 0;
+        }
+
+        .billionaire-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(0.3rem, 0.6vh, 0.5rem);
+        }
+
+        .billionaire-img {
+            width: clamp(80px, 12vw, 140px);
+            height: clamp(80px, 12vw, 140px);
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 2px solid var(--border-terminal);
+            filter: grayscale(30%);
+            transition: filter 0.4s, border-color 0.4s, box-shadow 0.4s;
+        }
+
+        .billionaire-card:hover .billionaire-img {
+            filter: grayscale(0%);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0,255,204,0.2);
+        }
+
+        .billionaire-clip--zuck {
+            width: clamp(80px, 12vw, 140px);
+            height: clamp(80px, 12vw, 140px);
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border-terminal);
+            flex-shrink: 0;
+            transition: border-color 0.4s, box-shadow 0.4s;
+        }
+
+        .billionaire-card:hover .billionaire-clip--zuck {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        .billionaire-clip--zuck .billionaire-img {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+            display: block;
+            object-position: 50% 42%;
+            transform: scale(1.2);
+            transform-origin: center center;
+            box-shadow: none;
+        }
+
+        .billionaire-card:hover .billionaire-clip--zuck .billionaire-img {
+            box-shadow: none;
+        }
+
+        .billionaire-name {
+            font-size: var(--small-size);
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .billionaire-detail {
+            font-size: clamp(0.55rem, 0.85vw, 0.7rem);
+            color: var(--text-secondary);
+        }
+
+        .opportunity-message {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .opportunity-message strong {
+            color: var(--accent-cyan);
+        }
+
+        /* ===========================================
+           SLIDE 5: GENIE — AI = YOUR GENIE
+           =========================================== */
+        .slide-genie .slide-content {
+            align-items: center;
+        }
+
+        .slide-genie .terminal {
+            width: min(90vw, 850px);
+        }
+
+        .genie-layout {
+            display: flex;
+            align-items: center;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+        }
+
+        @media (max-width: 700px) {
+            .genie-layout {
+                flex-direction: column;
+            }
+        }
+
+        .genie-img {
+            width: clamp(100px, 15vw, 180px);
+            height: auto;
+            max-height: min(30vh, 200px);
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(0,255,204,0.2));
+            animation: genieFloat 4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes genieFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .genie-text {
+            flex: 1;
+        }
+
+        .genie-text ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.4rem, 0.8vh, 0.7rem);
+        }
+
+        .genie-text li {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            padding-left: 1.5em;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .genie-text li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-magenta);
+        }
+
+        .genie-text .highlight-box {
+            background: rgba(0,255,204,0.06);
+            border: 1px solid rgba(0,255,204,0.15);
+            border-radius: 8px;
+            padding: clamp(0.5rem, 1vh, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);
+            margin-top: clamp(0.5rem, 1vh, 0.8rem);
+            font-size: var(--code-size);
+            color: var(--accent-cyan);
+        }
+
+        /* ===========================================
+           SLIDE 6: MYTH VS REALITY
+           =========================================== */
+        .slide-myth .slide-content {
+            align-items: center;
+        }
+
+        .slide-myth .terminal {
+            width: min(90vw, 880px);
+        }
+
+        .myth-vs-reality {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1rem, 2vw, 2rem);
+            margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+        }
+
+        @media (max-width: 700px) {
+            .myth-vs-reality {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .myth-card, .reality-card {
+            border-radius: 10px;
+            padding: clamp(0.8rem, 1.5vh, 1.2rem) clamp(1rem, 2vw, 1.5rem);
+        }
+
+        .myth-card {
+            background: rgba(255,0,170,0.06);
+            border: 1px solid rgba(255,0,170,0.2);
+        }
+
+        .reality-card {
+            background: rgba(0,255,204,0.06);
+            border: 1px solid rgba(0,255,204,0.2);
+        }
+
+        .card-label {
+            font-size: var(--small-size);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: clamp(0.3rem, 0.6vh, 0.5rem);
+        }
+
+        .myth-card .card-label { color: var(--accent-magenta); }
+        .reality-card .card-label { color: var(--accent-cyan); }
+
+        .card-text {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .research-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-terminal);
+            border-radius: 8px;
+            padding: clamp(0.6rem, 1.2vh, 1rem) clamp(1rem, 2vw, 1.5rem);
+            margin-top: clamp(0.5rem, 1vh, 0.8rem);
+        }
+
+        .research-box .label {
+            font-size: var(--small-size);
+            color: var(--accent-yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: clamp(0.2rem, 0.4vh, 0.4rem);
+        }
+
+        .research-box p {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .scissors-icon {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            display: inline-block;
+            animation: scissorsOpen 2s ease-in-out infinite;
+        }
+
+        @keyframes scissorsOpen {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.2); }
+        }
+
+        /* ===========================================
+           SLIDE 7: HOW LLMs WORK
+           =========================================== */
+        .slide-llm .slide-content {
+            align-items: center;
+        }
+
+        .slide-llm .terminal {
+            width: min(90vw, 880px);
+        }
+
+        .llm-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1rem, 2vw, 2rem);
+            margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+        }
+
+        @media (max-width: 700px) {
+            .llm-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .llm-box {
+            border-radius: 10px;
+            padding: clamp(0.8rem, 1.5vh, 1.2rem) clamp(1rem, 2vw, 1.5rem);
+        }
+
+        .llm-box-trained {
+            background: rgba(0,255,204,0.06);
+            border: 1px solid rgba(0,255,204,0.2);
+        }
+
+        .llm-box-search {
+            background: rgba(88,166,255,0.06);
+            border: 1px solid rgba(88,166,255,0.2);
+        }
+
+        .llm-box .box-label {
+            font-size: var(--small-size);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: clamp(0.3rem, 0.6vh, 0.5rem);
+        }
+
+        .llm-box-trained .box-label { color: var(--accent-cyan); }
+        .llm-box-search .box-label { color: var(--accent-blue); }
+
+        .llm-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.3rem, 0.6vh, 0.5rem);
+        }
+
+        .llm-box ul li {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding-left: 1.2em;
+            position: relative;
+        }
+
+        .llm-box ul li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .llm-box-search ul li::before {
+            color: var(--accent-blue);
+        }
+
+        .llm-demo-hint {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-terminal);
+            border-radius: 8px;
+            padding: clamp(0.5rem, 1vh, 0.8rem) clamp(1rem, 2vw, 1.5rem);
+            margin-top: clamp(0.3rem, 0.8vh, 0.6rem);
+            text-align: center;
+            font-size: var(--code-size);
+            color: var(--text-secondary);
+        }
+
+        .llm-demo-hint .accent {
+            color: var(--accent-yellow);
+            font-weight: 700;
+        }
+
+        /* ===========================================
+           SLIDE 8: PRIVATE TUTOR — BLOOM
+           =========================================== */
+        .slide-tutor .slide-content {
+            align-items: center;
+        }
+
+        .slide-tutor .terminal {
+            width: min(90vw, 880px);
+        }
+
+        .tutor-layout {
+            display: flex;
+            align-items: center;
+            gap: clamp(1.5rem, 3vw, 3rem);
+            margin: clamp(0.5rem, 1.5vh, 1rem) 0;
+        }
+
+        @media (max-width: 700px) {
+            .tutor-layout {
+                flex-direction: column;
+            }
+        }
+
+        .tutor-img {
+            width: clamp(100px, 14vw, 170px);
+            height: auto;
+            max-height: min(30vh, 200px);
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid var(--border-terminal);
+            filter: sepia(20%) drop-shadow(0 0 15px rgba(0,255,204,0.1));
+            flex-shrink: 0;
+        }
+
+        .tutor-points {
+            flex: 1;
+        }
+
+        .tutor-points ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.4rem, 0.8vh, 0.7rem);
+        }
+
+        .tutor-points li {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            padding-left: 1.5em;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .tutor-points li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        .stat-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0,255,204,0.15), rgba(255,0,170,0.1));
+            border: 1px solid rgba(0,255,204,0.2);
+            border-radius: 6px;
+            padding: 0.15em 0.6em;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .tutor-conclusion {
+            background: rgba(0,255,204,0.06);
+            border: 1px solid rgba(0,255,204,0.15);
+            border-radius: 8px;
+            padding: clamp(0.5rem, 1vh, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);
+            margin-top: clamp(0.5rem, 1vh, 0.8rem);
+            font-size: var(--code-size);
+            color: var(--accent-cyan);
+            text-align: center;
+        }
+
+        /* ===========================================
+           SLIDE 9: REASONING
+           =========================================== */
+        .slide-reasoning .slide-content {
+            align-items: center;
+        }
+
+        .slide-reasoning .terminal {
+            width: min(90vw, 920px);
+        }
+
+        .reasoning-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(1rem, 2vw, 2rem);
+            margin: clamp(0.5rem, 1vh, 0.8rem) 0;
+        }
+
+        @media (max-width: 700px) {
+            .reasoning-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .reasoning-box {
+            border-radius: 10px;
+            padding: clamp(0.6rem, 1.2vh, 1rem) clamp(0.8rem, 1.5vw, 1.2rem);
+        }
+
+        .reasoning-box-fast {
+            background: rgba(88,166,255,0.06);
+            border: 1px solid rgba(88,166,255,0.2);
+        }
+
+        .reasoning-box-deep {
+            background: rgba(210,168,255,0.06);
+            border: 1px solid rgba(210,168,255,0.2);
+        }
+
+        .reasoning-box .box-label {
+            font-size: var(--small-size);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: clamp(0.2rem, 0.4vh, 0.4rem);
+        }
+
+        .reasoning-box-fast .box-label { color: var(--accent-blue); }
+        .reasoning-box-deep .box-label { color: var(--accent-purple); }
+
+        .reasoning-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.2rem, 0.4vh, 0.4rem);
+        }
+
+        .reasoning-box ul li {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding-left: 1.2em;
+            position: relative;
+        }
+
+        .reasoning-box ul li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .reasoning-box-fast ul li::before { color: var(--accent-blue); }
+        .reasoning-box-deep ul li::before { color: var(--accent-purple); }
+
+        .reasoning-demo {
+            display: flex;
+            align-items: center;
+            gap: clamp(1rem, 2vw, 2rem);
+            margin-top: clamp(0.3rem, 0.6vh, 0.5rem);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-terminal);
+            border-radius: 10px;
+            padding: clamp(0.5rem, 1vh, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);
+        }
+
+        .reasoning-demo img {
+            width: clamp(120px, 18vw, 220px);
+            height: auto;
+            max-height: min(25vh, 180px);
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid var(--border-terminal);
+            flex-shrink: 0;
+        }
+
+        .reasoning-demo-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.2rem, 0.4vh, 0.4rem);
+        }
+
+        .reasoning-demo-text .demo-label {
+            font-size: var(--small-size);
+            font-weight: 700;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .reasoning-demo-text .demo-answer {
+            font-size: var(--code-size);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .reasoning-demo-text .demo-answer strong {
+            color: var(--accent-green);
+        }
+
+        @media (max-width: 700px) {
+            .reasoning-demo {
+                flex-direction: column;
+            }
+        }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+            z-index: 9999;
+            transition: width 0.3s ease-out;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* ===========================================
+           NAVIGATION DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(12px, 2vw, 24px);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1vh, 10px);
+            z-index: 9998;
+        }
+
+        .nav-dot {
+            width: clamp(6px, 0.8vw, 10px);
+            height: clamp(6px, 0.8vw, 10px);
+            border-radius: 50%;
+            background: var(--border-terminal);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background: var(--accent-cyan);
+            opacity: 0.7;
+        }
+
+        /* ===========================================
+           INLINE EDITING
+           =========================================== */
+        .edit-hotzone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            z-index: 10000;
+            cursor: pointer;
+        }
+
+        .edit-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            background: var(--bg-terminal);
+            border: 1px solid var(--border-terminal);
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, box-shadow 0.3s ease;
+            z-index: 10001;
+        }
+
+        .edit-toggle.show,
+        .edit-toggle.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .edit-toggle.active {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(0,255,204,0.3);
+        }
+
+        .edit-toggle:hover {
+            box-shadow: 0 0 12px rgba(0,255,204,0.2);
+        }
+
+        /* Editing active state */
+        [contenteditable="true"] {
+            outline: 1px dashed rgba(0,255,204,0.3);
+            outline-offset: 4px;
+            border-radius: 4px;
+            cursor: text;
+        }
+
+        [contenteditable="true"]:focus {
+            outline-color: var(--accent-cyan);
+        }
+
+        .save-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-terminal);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            padding: 0.6em 1.5em;
+            border-radius: 8px;
+            z-index: 10002;
+            transition: transform 0.4s var(--ease-out-expo);
+            pointer-events: none;
+        }
+
+        .save-toast.visible {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === PROGRESS BAR === -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- === NAVIGATION DOTS === -->
+    <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+    <!-- === INLINE EDITING CONTROLS === -->
+    <div class="edit-hotzone" id="editHotzone"></div>
+    <button class="edit-toggle" id="editToggle" title="Szerkesztés (E)">✏️ Edit</button>
+    <div class="save-toast" id="saveToast">💾 Mentve!</div>
+
+    <!-- ===========================================
+         SLIDE 1: TITLE / COVER
+         =========================================== -->
+    <section class="slide slide-title" data-slide="0">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -15%; right: -10%;"></div>
+        <div class="orb orb-magenta" style="bottom: -15%; left: -5%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">ai-eloadas ~ zsh</span>
+                </div>
+                <div class="terminal-body" style="text-align: center;">
+                    <div class="type-line">
+                        <span class="title-badge">AI Előadás 2026</span>
+                    </div>
+                    <div class="type-line">
+                        <div class="title-display">
+                            Mesterséges<br><span class="glow">Intelligencia</span>
+                        </div>
+                    </div>
+                    <div class="type-line">
+                        <p class="title-subtitle"><span class="prompt">$</span> A jövő technológiája — ma. <span class="cursor"></span></p>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> connected</span>
+                    <span>slides: 9 | lang: hu</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 2: ABOUT ME — BEMUTATKOZÁS
+         =========================================== -->
+    <section class="slide slide-about" data-slide="1">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-magenta" style="top: -10%; left: -8%;"></div>
+        <div class="orb orb-cyan" style="bottom: -10%; right: -8%;"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">whoami — Kiss Domonkos</span>
+                </div>
+                <div class="terminal-body">
+                    <!-- Intro line -->
+                    <div class="type-line" style="margin-bottom: clamp(0.6rem, 1.2vh, 1rem);">
+                        <span class="prompt">$</span> <span class="func">whoami</span>
+                        <span style="color: #fff; font-weight: 700; margin-left: 0.5em;">Kiss Domonkos</span>
+                    </div>
+
+                    <div style="display: flex; gap: clamp(1rem, 2vw, 2rem); align-items: center;">
+                    <img src="domonkoskiss.png" alt="Kiss Domonkos" style="width: clamp(80px, 10vw, 130px); height: clamp(80px, 10vw, 130px); border-radius: 50%; object-fit: cover; object-position: center 20%; border: 2px solid var(--accent-cyan); flex-shrink: 0;" />
+                    <div class="about-grid" style="flex: 1;">
+                        <!-- Left: Social & Content Creation -->
+                        <div>
+                            <div class="type-line">
+                                <div class="about-section-title">// Tartalomgyártó</div>
+                            </div>
+                            <div class="type-line">
+                                <div class="social-links">
+                                    <span class="social-badge">
+                                        <span class="social-icon">▶</span> YouTube
+                                        <span style="color: var(--text-secondary);">domonkoskiss1</span>
+                                    </span>
+                                    <span class="social-badge">
+                                        <span class="social-icon">♪</span> TikTok
+                                        <span style="color: var(--text-secondary);">domonkoskiss1</span>
+                                    </span>
+                                    <span class="social-badge">
+                                        <span class="social-icon">◉</span> Instagram
+                                        <span style="color: var(--text-secondary);">domonkoskiss1</span>
+                                    </span>
+                                    <span class="social-badge">
+                                        <span class="social-icon">f</span> Facebook
+                                        <span style="color: var(--text-secondary);">Kiss Domonkos</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Professional -->
+                        <div>
+                            <div class="type-line">
+                                <div class="about-section-title">// Szoftverfejlesztő & AI</div>
+                            </div>
+                            <div class="type-line">
+                                <ul class="about-list">
+                                    <li>Szoftverfejlesztés & <span class="about-highlight">AI projektek</span> több éve</li>
+                                    <li>Vállalkozásoknak fejlesztek — külföldi bankoknak is</li>
+                                    <li>Alapító tag: <span class="about-highlight">Elevate Group Consulting</span> 🇨🇦</li>
+                                    <li>AI edukáló előadások tartása</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> social: active</span>
+                    <span>followers: many | projects: ∞</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3: LIVE DEMO — GAME PROMPT
+         =========================================== -->
+    <section class="slide slide-demo" data-slide="2">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -10%; left: 50%; transform: translateX(-50%);"></div>
+        <div class="orb orb-magenta" style="bottom: -20%; right: -5%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">live-demo ~ prompt.txt</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line">
+                        <span class="demo-label">🎮 Élő Demó</span>
+                    </div>
+                    <div class="type-line" style="margin-bottom: clamp(0.5rem, 1vh, 0.8rem);">
+                        <span class="prompt">$</span> <span class="func">cat</span> <span class="string">prompt.txt</span>
+                    </div>
+                    <div class="type-line">
+                        <div class="demo-prompt-text"><span class="string">Készíts egy egyszerű böngészős játékot HTML, CSS és
+JavaScript segítségével! A játékos egy űrhajót
+irányít, ami lézersugárral lő ellenségekre.
+Az ellenségek felülről jönnek, egyre gyorsabban.
+Legyen pontszámláló és Game Over képernyő.
+Csinálj hozzá szép neon-stílusú designt.</span></div>
+                    </div>
+                    <div class="type-line">
+                        <div class="demo-hint">
+                            <span class="comment">// Ezt a promptot bemásolom egy AI eszközbe és élőben fejlesztjük le! 🚀</span>
+                        </div>
+                    </div>
+                    <div class="type-line">
+                        <span class="prompt">$</span> <span class="cursor"></span>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> ready</span>
+                    <span>mode: live-coding | audience: 200</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 4: BILLIONAIRES — AI = YOUR OPPORTUNITY
+         =========================================== -->
+    <section class="slide slide-opportunity" data-slide="3">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -12%; left: -5%;"></div>
+        <div class="orb orb-magenta" style="bottom: -15%; right: -8%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">lehetőség ~ milliárdos-minta</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);">
+                        <span class="func" style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">AI: <span style="color: var(--accent-cyan);">Hatalmas lehetőség</span></span>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.3rem, 0.5vh, 0.4rem);">
+                        <span class="comment" style="font-size: var(--small-size);">// Az internet hajnalán fiatalok voltak — és mertek lépni.</span>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="billionaires-row">
+                            <div class="billionaire-card">
+                                <div class="billionaire-clip--zuck">
+                                    <img src="zuck_no_bg.png" alt="Mark Zuckerberg" class="billionaire-img">
+                                </div>
+                                <span class="billionaire-name">Zuckerberg</span>
+                                <span class="billionaire-detail">19 évesen indította a Facebookot</span>
+                            </div>
+                            <div class="billionaire-card">
+                                <img src="jeff_no_bg.png" alt="Jeff Bezos" class="billionaire-img">
+                                <span class="billionaire-name">Bezos</span>
+                                <span class="billionaire-detail">30 évesen indította az Amazont</span>
+                            </div>
+                            <div class="billionaire-card">
+                                <img src="elon_no_bg.png" alt="Elon Musk" class="billionaire-img">
+                                <span class="billionaire-name">Musk</span>
+                                <span class="billionaire-detail">24 évesen alapította a Zip2-t</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line">
+                        <p class="opportunity-message">Most egy <strong>ehhez hasonló technológiai forradalom</strong> zajlik. Az AI-val sokszoros előnyre tehettek szert — akár az idősebb generációt, meglévő szakembereket is megelőzhetitek.</p>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> history: loaded</span>
+                    <span>era: AI revolution</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 5: GENIE — AI IN YOUR HANDS
+         =========================================== -->
+    <section class="slide slide-genie" data-slide="4">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-magenta" style="top: -10%; right: -5%;"></div>
+        <div class="orb orb-cyan" style="bottom: -12%; left: -8%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">genie ~ a-kezedben</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line">
+                        <div class="genie-layout">
+                            <img src="genie_no_bg.png" alt="Dzsin illusztráció" class="genie-img">
+                            <div class="genie-text">
+                                <ul>
+                                    <li>Gyakorlatilag a kezetekbe került egy <span style="color: var(--accent-cyan); font-weight: 700;">mindent tudó dzsin</span></li>
+                                    <li>Bármit kérdezhetsz tőle, bármiben segít — programoz, ír, tanít, elemez, fordít</li>
+                                    <li><span style="color: var(--accent-magenta); font-weight: 700;">Nagy hiba nem használni.</span> Aki nem lép, lemarad.</li>
+                                    <li>Ezért nagyon hasznos <strong style="color: var(--accent-cyan);">AI eszközökről tanulni</strong></li>
+                                </ul>
+                                <div class="highlight-box">
+                                    <span class="prompt">$</span> Ebben az előadásban tippeket adok, hogyan használjátok jól ezeket az eszközöket.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> genie: summoned</span>
+                    <span>wishes: unlimited</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 6: MYTH VS REALITY — AI & CREATIVITY
+         =========================================== -->
+    <section class="slide slide-myth" data-slide="5">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -10%; left: 50%; transform: translateX(-50%);"></div>
+        <div class="orb orb-magenta" style="bottom: -15%; left: -5%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">myth-busting ~ tanulás.md</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Akkor már mást <span style="color: var(--accent-magenta);">nem is kell tanulni?</span></span>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="myth-vs-reality">
+                            <div class="myth-card">
+                                <div class="card-label">&#x2717; Tévhit</div>
+                                <p class="card-text">Az AI megcsinál mindent, már nem kell gondolkodni sem. Csak rábízom és kész.</p>
+                            </div>
+                            <div class="reality-card">
+                                <div class="card-label">&#x2713; Valóság</div>
+                                <p class="card-text">Akinek jók az alapjai, annak az AI <strong style="color: var(--accent-cyan);">felerősíti</strong> a tudását. Akinek nincsenek — gyakran még rosszabbul teljesít.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="research-box">
+                            <div class="label">&#128300; Friss kutatás</div>
+                            <p>Összemérték, hogyan teljesítenek AI-jal a jó és a kevésbé jó kreatív alapokkal rendelkező diákok. <strong style="color: var(--accent-cyan);">Eredmény:</strong> akinek erős az alaptudása, annak az AI sokszorozó — akinek gyenge, annak nem segít, sőt.</p>
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-top: clamp(0.5rem, 1vh, 0.8rem);">
+                        <span style="font-size: var(--body-size); color: var(--text-secondary);">Az AI <span class="scissors-icon">&#9986;</span> gyakran nyitja az ollót — meglévő képességeket sokszoroz.</span>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> research: verified</span>
+                    <span>conclusion: keep learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 7: PRIVATE TUTOR — BLOOM'S RESEARCH
+         =========================================== -->
+    <section class="slide slide-tutor" data-slide="6">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -10%; right: -5%;"></div>
+        <div class="orb orb-magenta" style="bottom: -12%; left: -8%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">bloom ~ magántanár.md</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Saját <span style="color: var(--accent-cyan);">magántanár</span> mindenkinél</span>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="tutor-layout">
+                            <img src="aristotle_no_bg.png" alt="Arisztotelész" class="tutor-img">
+                            <div class="tutor-points">
+                                <ul>
+                                    <li>Az AI segít, hogy <strong style="color: var(--accent-cyan);">bármilyen területen</strong> tanuljunk — türelmesen, a tempónkban</li>
+                                    <li>Bloom kutatása bizonyította: a magántanárral tanuló diákok a többiek <span class="stat-highlight">98%-ánál</span> jobban teljesítettek</li>
+                                    <li>Régen ez a <span style="color: var(--accent-orange);">gazdagok kiváltsága</span> volt</li>
+                                    <li>Most már bárkinek lehet egy <strong style="color: var(--accent-cyan);">végtelenül türelmes, nagyon okos mentor</strong> — AI formájában</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="tutor-conclusion">
+                            <span class="prompt">$</span> Arisztotelész magántanár volt Nagy Sándornak. Most neked is van egy. Használd!
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> bloom: 2-sigma</span>
+                    <span>tutor: AI | cost: free</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 8: HOW DOES AN LLM WORK?
+         =========================================== -->
+    <section class="slide slide-llm" data-slide="7">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -8%; left: -6%;"></div>
+        <div class="orb orb-magenta" style="bottom: -10%; right: -5%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">llm ~ hogyan_működik.md</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Hogyan működik egy <span style="color: var(--accent-cyan);">LLM</span>?</span>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="llm-columns">
+                            <div class="llm-box llm-box-trained">
+                                <div class="box-label">🧠 Tanult tudás</div>
+                                <ul>
+                                    <li>Hatalmas szövegmennyiségből <strong style="color: var(--accent-cyan);">tanított matematikai modell</strong></li>
+                                    <li>Van saját tudása — keresés nélkül is válaszol</li>
+                                    <li>Pl. <em>"Mi a fotoszintézis?"</em> → tudja, mert tanulta</li>
+                                </ul>
+                            </div>
+
+                            <div class="llm-box llm-box-search">
+                                <div class="box-label">🔍 Keresés + kontextus</div>
+                                <ul>
+                                    <li>Van egy <strong style="color: var(--accent-blue);">cutoff dátum</strong> — ezután nem tud semmit</li>
+                                    <li>Friss kérdésnél <strong style="color: var(--accent-blue);">cikkeket keres</strong>, "elolvassa"</li>
+                                    <li>Az info bekerül a <em>kontextusba</em>, abból válaszol</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="llm-demo-hint">
+                            <span class="accent">▶ LIVE DEMO</span> — kérdezzük meg a ChatGPT-t: mi a cutoff-ja? Ki nyert idén Oscar-díjat?
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> model: neural network</span>
+                    <span>training: petabytes of text</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 9: REASONING
+         =========================================== -->
+    <section class="slide slide-reasoning" data-slide="8">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -6%; right: -8%;"></div>
+        <div class="orb orb-magenta" style="bottom: -10%; left: -6%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content">
+            <div class="terminal terminal-boot">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">reasoning ~ gondolkodás.md</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Reasoning — <span style="color: var(--accent-purple);">gondolkodó</span> modellek</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(0.2rem, 0.4vh, 0.3rem);">
+                        <span style="font-size: var(--code-size); color: var(--text-primary);">Úgy tanítottak modelleket, hogy legyenek <strong style="color: var(--accent-purple);">válaszolás előtti gondolataik</strong> — lebontják a feladatot részekre, mielőtt válaszolnak.</span>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="reasoning-layout">
+                            <div class="reasoning-box reasoning-box-fast">
+                                <div class="box-label">⚡ Gyors kérdés</div>
+                                <ul>
+                                    <li>ChatGPT: <strong style="color: var(--accent-blue);">auto</strong> vagy <strong style="color: var(--accent-blue);">instant</strong> mód</li>
+                                    <li>Gemini: <strong style="color: var(--accent-blue);">fast</strong> mód</li>
+                                    <li>Egyszerű kérdéseknél felesleges a gondolkodás</li>
+                                </ul>
+                            </div>
+
+                            <div class="reasoning-box reasoning-box-deep">
+                                <div class="box-label">🧠 Összetett feladat</div>
+                                <ul>
+                                    <li>ChatGPT: <strong style="color: var(--accent-purple);">thinking</strong> mód</li>
+                                    <li>Gemini: <strong style="color: var(--accent-purple);">thinking</strong> vagy <strong style="color: var(--accent-purple);">pro</strong> modell</li>
+                                    <li>Átgondoltabb, pontosabb eredmény</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line">
+                        <div class="reasoning-demo">
+                            <img src="erettsegi_feladat.png" alt="Érettségi feladat">
+                            <div class="reasoning-demo-text">
+                                <span class="demo-label">▶ Live Demo — érettségi feladat</span>
+                                <span class="demo-answer">a) feladat helyes megoldása: <strong>x = 20</strong></span>
+                                <span class="demo-answer">b) feladat helyes megoldása: a téglalap területe <strong>204 cm²</strong></span>
+                                <span style="font-size: var(--small-size); color: var(--text-secondary); margin-top: 0.2em;">Screenshotoljuk be és kérdezzük meg a reasoning modellt!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> chain-of-thought</span>
+                    <span>mode: think before you answer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       JAVASCRIPT: Slide Controller + Inline Editor
+       =========================================== -->
+    <script>
+        /* ===========================================
+           SLIDE PRESENTATION CONTROLLER
+           Handles navigation, animations, and progress
+           =========================================== */
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.isScrolling = false;
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupTouchNav();
+                this.setupWheelNav();
+                this.setupProgressBar();
+                this.setupNavDots();
+            }
+
+            /* Intersection Observer — triggers .visible class for animations */
+            setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const idx = parseInt(entry.target.dataset.slide);
+                            if (!isNaN(idx)) {
+                                this.currentSlide = idx;
+                                this.updateProgressBar();
+                                this.updateNavDots();
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+
+            /* Keyboard navigation: arrows, space, page up/down */
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    // Skip if user is editing text
+                    if (e.target.getAttribute('contenteditable') === 'true') return;
+
+                    switch(e.key) {
+                        case 'ArrowDown':
+                        case 'ArrowRight':
+                        case ' ':
+                        case 'PageDown':
+                            e.preventDefault();
+                            this.goToSlide(this.currentSlide + 1);
+                            break;
+                        case 'ArrowUp':
+                        case 'ArrowLeft':
+                        case 'PageUp':
+                            e.preventDefault();
+                            this.goToSlide(this.currentSlide - 1);
+                            break;
+                        case 'Home':
+                            e.preventDefault();
+                            this.goToSlide(0);
+                            break;
+                        case 'End':
+                            e.preventDefault();
+                            this.goToSlide(this.slides.length - 1);
+                            break;
+                    }
+                });
+            }
+
+            /* Touch/swipe support for mobile */
+            setupTouchNav() {
+                let startY = 0;
+                document.addEventListener('touchstart', (e) => {
+                    startY = e.touches[0].clientY;
+                }, { passive: true });
+
+                document.addEventListener('touchend', (e) => {
+                    const diffY = startY - e.changedTouches[0].clientY;
+                    if (Math.abs(diffY) > 50) {
+                        this.goToSlide(this.currentSlide + (diffY > 0 ? 1 : -1));
+                    }
+                }, { passive: true });
+            }
+
+            /* Mouse wheel navigation with debounce */
+            setupWheelNav() {
+                document.addEventListener('wheel', (e) => {
+                    if (this.isScrolling) return;
+                    this.isScrolling = true;
+
+                    if (e.deltaY > 30) {
+                        this.goToSlide(this.currentSlide + 1);
+                    } else if (e.deltaY < -30) {
+                        this.goToSlide(this.currentSlide - 1);
+                    }
+
+                    setTimeout(() => { this.isScrolling = false; }, 800);
+                }, { passive: true });
+            }
+
+            /* Progress bar at the top */
+            setupProgressBar() {
+                this.progressBar = document.getElementById('progressBar');
+                this.updateProgressBar();
+            }
+
+            updateProgressBar() {
+                const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = progress + '%';
+            }
+
+            /* Navigation dots on the right */
+            setupNavDots() {
+                const container = document.getElementById('navDots');
+                this.slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('nav-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.setAttribute('aria-label', `Dia ${i + 1}`);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    container.appendChild(dot);
+                });
+                this.dots = container.querySelectorAll('.nav-dot');
+            }
+
+            updateNavDots() {
+                this.dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === this.currentSlide);
+                });
+            }
+
+            /* Navigate to a specific slide */
+            goToSlide(index) {
+                if (index < 0 || index >= this.slides.length) return;
+                this.currentSlide = index;
+                this.slides[index].scrollIntoView({ behavior: 'smooth' });
+                this.updateProgressBar();
+                this.updateNavDots();
+            }
+        }
+
+        /* ===========================================
+           INLINE EDITOR
+           Edit text in-browser, auto-save to localStorage
+           =========================================== */
+        class InlineEditor {
+            constructor() {
+                this.isActive = false;
+                this.storageKey = 'ai-eloadas-edits';
+                this.editableSelectors = 'h1, h2, h3, p, li, span.string, span.comment, .title-display, .demo-prompt-text, .about-section-title, .title-subtitle, .demo-hint';
+                this.loadEdits();
+            }
+
+            toggleEditMode() {
+                this.isActive = !this.isActive;
+                const toggle = document.getElementById('editToggle');
+                toggle.classList.toggle('active', this.isActive);
+                toggle.textContent = this.isActive ? '✅ Done' : '✏️ Edit';
+
+                document.querySelectorAll('.slide').forEach(slide => {
+                    slide.querySelectorAll(this.editableSelectors).forEach(el => {
+                        if (this.isActive) {
+                            el.setAttribute('contenteditable', 'true');
+                        } else {
+                            el.removeAttribute('contenteditable');
+                        }
+                    });
+                });
+
+                if (!this.isActive) this.saveEdits();
+            }
+
+            /* Save edits to localStorage */
+            saveEdits() {
+                const edits = {};
+                document.querySelectorAll('.slide').forEach((slide, si) => {
+                    slide.querySelectorAll(this.editableSelectors).forEach((el, ei) => {
+                        const key = `s${si}-e${ei}`;
+                        edits[key] = el.innerHTML;
+                    });
+                });
+                localStorage.setItem(this.storageKey, JSON.stringify(edits));
+                this.showToast();
+            }
+
+            /* Load edits from localStorage */
+            loadEdits() {
+                const saved = localStorage.getItem(this.storageKey);
+                if (!saved) return;
+                try {
+                    const edits = JSON.parse(saved);
+                    document.querySelectorAll('.slide').forEach((slide, si) => {
+                        slide.querySelectorAll(this.editableSelectors).forEach((el, ei) => {
+                            const key = `s${si}-e${ei}`;
+                            if (edits[key] !== undefined) el.innerHTML = edits[key];
+                        });
+                    });
+                } catch(e) { /* ignore parse errors */ }
+            }
+
+            showToast() {
+                const toast = document.getElementById('saveToast');
+                toast.classList.add('visible');
+                setTimeout(() => toast.classList.remove('visible'), 2000);
+            }
+        }
+
+        /* ===========================================
+           INITIALIZATION
+           =========================================== */
+        const presentation = new SlidePresentation();
+        const editor = new InlineEditor();
+
+        /* Edit toggle — JS-based hover with 400ms delay */
+        const hotzone = document.getElementById('editHotzone');
+        const editToggle = document.getElementById('editToggle');
+        let hideTimeout = null;
+
+        hotzone.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            editToggle.classList.add('show');
+        });
+        hotzone.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                if (!editor.isActive) editToggle.classList.remove('show');
+            }, 400);
+        });
+        editToggle.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+        });
+        editToggle.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                if (!editor.isActive) editToggle.classList.remove('show');
+            }, 400);
+        });
+
+        /* Click handlers */
+        editToggle.addEventListener('click', () => editor.toggleEditMode());
+        hotzone.addEventListener('click', () => editor.toggleEditMode());
+
+        /* Keyboard shortcut: E to toggle edit, Ctrl+S to save */
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+                editor.toggleEditMode();
+            }
+            if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                if (editor.isActive) editor.saveEdits();
+            }
+        });
+    </script>
+</body>
+</html>
