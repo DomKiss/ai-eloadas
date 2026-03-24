@@ -218,6 +218,11 @@
             66% { transform: translate(-10px, 15px) scale(0.95); }
         }
 
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; filter: drop-shadow(0 0 0px var(--accent-green)); }
+            50% { opacity: 0.7; filter: drop-shadow(0 0 12px var(--accent-green)); }
+        }
+
         /* ===========================================
            TERMINAL WINDOW COMPONENT
            Reusable terminal card
@@ -1286,12 +1291,12 @@
                         </div>
                     </div>
                     <div class="type-line">
-                        <p class="title-subtitle"><span class="prompt">$</span> A jövő technológiája — ma. <span class="cursor"></span></p>
+                        <p class="title-subtitle"><span class="prompt">$</span> És a benne rejlő lehetőségek. <span class="cursor"></span></p>
                     </div>
                 </div>
                 <div class="terminal-footer">
                     <span><span class="status-dot">●</span> connected</span>
-                    <span>slides: 9 | lang: hu</span>
+                    <span>slides: 13 | lang: hu</span>
                 </div>
             </div>
         </div>
@@ -1326,7 +1331,7 @@
                         <!-- Left: Social & Content Creation -->
                         <div>
                             <div class="type-line">
-                                <div class="about-section-title">// Tartalomgyártó</div>
+                                <div class="about-section-title">// Tartalomgyártás</div>
                             </div>
                             <div class="type-line">
                                 <div class="social-links">
@@ -1348,17 +1353,22 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="type-line">
+                                <p style="font-size: var(--small-size); color: var(--text-secondary); margin-top: clamp(0.3rem, 0.6vh, 0.5rem);">
+                                    <span class="about-highlight">50 000+</span> követő · <span class="about-highlight">~40 millió</span> össz. nézettség
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Right: Professional -->
                         <div>
                             <div class="type-line">
-                                <div class="about-section-title">// Szoftverfejlesztő & AI</div>
+                                <div class="about-section-title">// Szoftverfejlesztés, AI & Pénzügy</div>
                             </div>
                             <div class="type-line">
                                 <ul class="about-list">
                                     <li>Szoftverfejlesztés & <span class="about-highlight">AI projektek</span> több éve</li>
-                                    <li>Vállalkozásoknak fejlesztek — külföldi bankoknak is</li>
+                                    <li>Külföldi és magyar vállalkozásoknak</li>
                                     <li>Alapító tag: <span class="about-highlight">Elevate Group Consulting</span> 🇨🇦</li>
                                     <li>AI edukáló előadások tartása</li>
                                 </ul>
@@ -1369,7 +1379,7 @@
                 </div>
                 <div class="terminal-footer">
                     <span><span class="status-dot">●</span> social: active</span>
-                    <span>followers: many | projects: ∞</span>
+                    <span>followers: 50K | projects: ∞</span>
                 </div>
             </div>
         </div>
@@ -1401,11 +1411,7 @@
                     </div>
                     <div class="type-line">
                         <div class="demo-prompt-text"><span class="string">Készíts egy egyszerű böngészős játékot HTML, CSS és
-JavaScript segítségével! A játékos egy űrhajót
-irányít, ami lézersugárral lő ellenségekre.
-Az ellenségek felülről jönnek, egyre gyorsabban.
-Legyen pontszámláló és Game Over képernyő.
-Csinálj hozzá szép neon-stílusú designt.</span></div>
+JavaScript segítségével! A játék címe és témája: "Éjszakai Járat (BKK Túlélő)". A játékos egy fiatalt irányít, aki péntek este próbálja elérni az utolsó éjszakai buszt a Blaha Lujza téren.</span></div>
                     </div>
                     <div class="type-line">
                         <div class="demo-hint">
@@ -1446,8 +1452,11 @@ Csinálj hozzá szép neon-stílusú designt.</span></div>
                         <span class="func" style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">AI: <span style="color: var(--accent-cyan);">Hatalmas lehetőség</span></span>
                     </div>
 
+                    <div class="type-line" style="text-align: center;">
+                        <span class="comment" style="font-size: var(--small-size);">// Egy kis lelkesítés. Mi a hasonlóság bennük?</span>
+                    </div>
                     <div class="type-line" style="text-align: center; margin-bottom: clamp(0.3rem, 0.5vh, 0.4rem);">
-                        <span class="comment" style="font-size: var(--small-size);">// Az internet hajnalán fiatalok voltak — és mertek lépni.</span>
+                        <span class="comment" style="font-size: var(--small-size);">// Az internet hajnalán fiatalok voltak, gyorsan tanultak az új tech-ről és mertek lépni.</span>
                     </div>
 
                     <div class="type-line">
@@ -1473,7 +1482,7 @@ Csinálj hozzá szép neon-stílusú designt.</span></div>
                     </div>
 
                     <div class="type-line">
-                        <p class="opportunity-message">Most egy <strong>ehhez hasonló technológiai forradalom</strong> zajlik. Az AI-val sokszoros előnyre tehettek szert — akár az idősebb generációt, meglévő szakembereket is megelőzhetitek.</p>
+                        <p class="opportunity-message">Most egy <strong>ehhez hasonló technológiai forradalom</strong> zajlik. Az AI-jal sokszoros előnyre tehettek szert — akár az idősebb generációt, meglévő szakembereket is megelőzhetitek.</p>
                     </div>
                 </div>
                 <div class="terminal-footer">
@@ -1513,7 +1522,7 @@ Csinálj hozzá szép neon-stílusú designt.</span></div>
                                     <li>Ezért nagyon hasznos <strong style="color: var(--accent-cyan);">AI eszközökről tanulni</strong></li>
                                 </ul>
                                 <div class="highlight-box">
-                                    <span class="prompt">$</span> Ebben az előadásban tippeket adok, hogyan használjátok jól ezeket az eszközöket.
+                                    <span class="prompt">$</span> Ebben az előadásban egyrészt segítek ebben elindulni.
                                 </div>
                             </div>
                         </div>
@@ -1572,6 +1581,10 @@ Csinálj hozzá szép neon-stílusú designt.</span></div>
                     <div class="type-line" style="text-align: center; margin-top: clamp(0.5rem, 1vh, 0.8rem);">
                         <span style="font-size: var(--body-size); color: var(--text-secondary);">Az AI <span class="scissors-icon">&#9986;</span> gyakran nyitja az ollót — meglévő képességeket sokszoroz.</span>
                     </div>
+
+                    <div class="type-line" style="text-align: center; margin-top: clamp(0.3rem, 0.5vh, 0.5rem);">
+                        <span style="font-size: clamp(0.45rem, 0.7vw, 0.6rem); color: var(--text-muted, #555); font-style: italic;">Forrás: Yu, S. et al. (2025) "Exploring Cognitive Presence Patterns in GenAI-Integrated Six-Hat Thinking…" <em>Int. J. Educ. Technol. Higher Educ.</em>, 22(1), 6. doi:10.1186/s41239-025-00545-x</span>
+                    </div>
                 </div>
                 <div class="terminal-footer">
                     <span><span class="status-dot">●</span> research: verified</span>
@@ -1619,7 +1632,7 @@ Csinálj hozzá szép neon-stílusú designt.</span></div>
 
                     <div class="type-line">
                         <div class="tutor-conclusion">
-                            <span class="prompt">$</span> Arisztotelész magántanár volt Nagy Sándornak. Most neked is van egy. Használd!
+                            <span class="prompt">$</span> A világ egyik legnagyobb hódítójának a bölcs Arisztotelész volt a magántanára. Most neked is megvan ez a luxus. Használd!
                         </div>
                     </div>
                 </div>
@@ -1752,6 +1765,476 @@ Csinálj hozzá szép neon-stílusú designt.</span></div>
                 <div class="terminal-footer">
                     <span><span class="status-dot">●</span> chain-of-thought</span>
                     <span>mode: think before you answer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 10: Szöveg generálás — random szám
+       =========================================== -->
+    <section class="slide slide-random" data-slide="9">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: 10%; left: -5%;"></div>
+        <div class="orb orb-magenta" style="bottom: 5%; right: -8%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 750px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">llm ~ szöveg_generálás.sh</span>
+                </div>
+                <div class="terminal-body" style="text-align: center;">
+
+                    <div class="type-line" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Szöveggenerálás - Random szám</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(1rem, 3vh, 2rem);">
+                        <span style="font-size: var(--body-size); color: var(--text-secondary); display: block; text-align: center;">Kérdezzük meg az LLM-et:</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(1.2rem, 3.5vh, 2.5rem);">
+                        <div style="background: rgba(0,255,204,0.06); border: 1px solid rgba(0,255,204,0.15); border-radius: 8px; padding: clamp(0.8rem, 2vh, 1.5rem) clamp(1rem, 2vw, 2rem); display: inline-block;">
+                            <span class="prompt" style="font-size: var(--code-size);">$</span>
+                            <span style="font-size: clamp(1rem, 2.5vw, 1.6rem); color: var(--accent-cyan); font-weight: 700;">&nbsp;„Mondj egy számot 1 és 10 között"</span>
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">
+                        <span style="font-size: var(--body-size); color: var(--accent-orange);">⚠ Nem lesz igazi random</span>
+                    </div>
+
+                    <div class="type-line">
+                        <span style="font-size: clamp(1rem, 2vw, 1.4rem); color: var(--text-primary);">Szinte biztosan a <strong style="font-size: clamp(2rem, 5vw, 4rem); color: var(--accent-magenta); font-family: var(--font-display); vertical-align: middle;">7</strong>-et választja</span>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> text-generation</span>
+                    <span>mode: next-token prediction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 11: Eszközhasználat — kód generálás
+       =========================================== -->
+    <section class="slide slide-tools" data-slide="10">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-magenta" style="top: -5%; right: -6%;"></div>
+        <div class="orb orb-cyan" style="bottom: -8%; left: -4%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 800px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">llm ~ eszközhasználat.sh</span>
+                </div>
+                <div class="terminal-body">
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.6rem, 1.5vh, 1.2rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Eszközhasználat — <span style="color: var(--accent-green);">kód generálás</span></span>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">
+                        <span style="font-size: var(--body-size); color: var(--text-secondary);">Az LLM magától nem tud „igazi" random-ot → de <strong style="color: var(--accent-green);">programot írni tud</strong>, ami igen!</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(0.8rem, 2vh, 1.5rem);">
+                        <div style="background: rgba(0,255,204,0.06); border: 1px solid rgba(0,255,204,0.15); border-radius: 8px; padding: clamp(0.6rem, 1.5vh, 1.2rem) clamp(1rem, 2vw, 1.5rem); text-align: left;">
+                            <div style="font-size: var(--small-size); color: var(--text-secondary); margin-bottom: clamp(0.3rem, 0.6vh, 0.5rem);">📋 Prompt — másold be:</div>
+                            <span style="font-size: var(--code-size); color: var(--accent-cyan); line-height: 1.6;">Készíts egy egyszerű, weben futtatható alkalmazást, ami véletlen számot generál egy megadott tartományban. Legyen egy „Generálás" gomb és jelenítse meg az eredményt.</span>
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center;">
+                        <div style="display: inline-flex; align-items: center; gap: clamp(0.4rem, 1vw, 0.8rem); background: rgba(255,165,87,0.08); border: 1px solid rgba(255,165,87,0.2); border-radius: 8px; padding: clamp(0.5rem, 1vh, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);">
+                            <span style="font-size: clamp(1rem, 2vw, 1.4rem);">💡</span>
+                            <span style="font-size: var(--body-size); color: var(--accent-orange);">Tipp: kapcsold be a <strong style="color: #fff;">Canvas (vászon) </strong> funkciót (ChatGPT / Gemini)</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> tool-use</span>
+                    <span>mode: code generation + execution</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 12: Komolyabb kódolási eszközök
+       =========================================== -->
+    <section class="slide slide-devtools" data-slide="11">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -8%; right: 10%;"></div>
+        <div class="orb orb-magenta" style="bottom: -6%; left: 5%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 800px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">dev ~ ai_coding_tools.md</span>
+                </div>
+                <div class="terminal-body" style="text-align: center;">
+
+                    <div class="type-line" style="margin-bottom: clamp(0.6rem, 1.5vh, 1.2rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Komolyabb <span style="color: var(--accent-blue);">kódolási eszközök</span></span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(1rem, 2.5vh, 2rem);">
+                        <span style="font-size: var(--body-size); color: var(--text-secondary);">AI-jal beszélgetve már komoly programokat lehet építeni</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(1rem, 2.5vh, 2rem);">
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.5rem, 1.5vw, 1.2rem); max-width: 700px; margin: 0 auto;">
+                            <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-terminal); border-radius: 10px; padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.4rem, 1vw, 0.8rem);">
+                                <img src="lovable-logo-icon.png" alt="Lovable" style="width: clamp(2rem, 4vw, 3.5rem); height: clamp(2rem, 4vw, 3.5rem); object-fit: contain; margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                                <div style="font-size: var(--body-size); color: var(--accent-magenta); font-weight: 700;">Lovable</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-terminal); border-radius: 10px; padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.4rem, 1vw, 0.8rem);">
+                                <img src="cursor_code_editor-logo_brandlogos.net_r1yfy.png" alt="Cursor" style="width: clamp(2rem, 4vw, 3.5rem); height: clamp(2rem, 4vw, 3.5rem); object-fit: contain; margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                                <div style="font-size: var(--body-size); color: var(--accent-cyan); font-weight: 700;">Cursor</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-terminal); border-radius: 10px; padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.4rem, 1vw, 0.8rem);">
+                                <img src="Claude_AI_symbol.svg" alt="Claude Code" style="width: clamp(2rem, 4vw, 3.5rem); height: clamp(2rem, 4vw, 3.5rem); object-fit: contain; margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                                <div style="font-size: var(--body-size); color: var(--accent-orange); font-weight: 700;">Claude Code</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-terminal); border-radius: 10px; padding: clamp(0.6rem, 1.5vh, 1rem) clamp(0.4rem, 1vw, 0.8rem);">
+                                <img src="codex-color.png" alt="Codex" style="width: clamp(2rem, 4vw, 3.5rem); height: clamp(2rem, 4vw, 3.5rem); object-fit: contain; margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                                <div style="font-size: var(--body-size); color: var(--accent-green); font-weight: 700;">Codex</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line">
+                        <div style="display: inline-block; background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.2); border-radius: 8px; padding: clamp(0.5rem, 1vh, 0.8rem) clamp(0.8rem, 1.5vw, 1.2rem);">
+                            <span style="font-size: var(--body-size); color: var(--accent-blue);">🔍 Érdemes otthon utánajárni — érdemes elmélyedni benne!</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> ai-dev-tools</span>
+                    <span>mode: vibe coding</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 13: Élő demó — slide generálás
+       =========================================== -->
+    <section class="slide slide-livedemo" data-slide="12">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="bottom: 0%; left: -6%;"></div>
+        <div class="orb orb-magenta" style="top: -5%; right: -4%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 820px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">claude-code ~ live_demo.sh</span>
+                </div>
+                <div class="terminal-body">
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.5rem, 1.2vh, 1rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Élő demó — <span style="color: var(--accent-yellow);">slide generálás</span></span>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.6rem, 1.5vh, 1.2rem);">
+                        <span style="font-size: var(--body-size); color: var(--text-secondary);">Ez a prezentáció is <strong style="color: var(--accent-yellow);">Claude Code</strong>-dal készült — most élőben megmutatom, hogyan!</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(0.6rem, 1.5vh, 1rem);">
+                        <div style="background: rgba(227,179,65,0.06); border: 1px solid rgba(227,179,65,0.2); border-radius: 8px; padding: clamp(0.6rem, 1.5vh, 1.2rem) clamp(1rem, 2vw, 1.5rem); text-align: left;">
+                            <div style="font-size: var(--small-size); color: var(--accent-yellow); margin-bottom: clamp(0.3rem, 0.6vh, 0.5rem); font-weight: 700;">📋 Prompt — ezt fogom beírni Claude Code-ba:</div>
+                            <span style="font-size: var(--code-size); color: var(--accent-cyan); line-height: 1.7;">Szeretnék egy következő slide-ot a prezentáció végére. Magyarázd el a gyerekeknek, hogy az AI nemcsak szöveget ír, hanem programozáson keresztül bármit létre tud hozni — például ezt a prezentációt is. Legyen vizuális és könnyen érthető!</span>
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center;">
+                        <div style="display: inline-flex; align-items: center; gap: clamp(0.5rem, 1vw, 0.8rem); animation: pulse-glow 2s ease-in-out infinite;">
+                            <span style="font-size: clamp(1.2rem, 2.5vw, 1.8rem);">▶</span>
+                            <span style="font-size: var(--body-size); color: var(--accent-green); font-weight: 700;">Nézzük élőben!</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> live-demo</span>
+                    <span>mode: generating slides in real-time</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 14: NotebookLM
+       =========================================== -->
+    <section class="slide slide-notebooklm" data-slide="13">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-magenta" style="top: 5%; left: -6%;"></div>
+        <div class="orb orb-cyan" style="bottom: -5%; right: -4%;"></div>
+        <div class="scanlines"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 850px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">google ~ notebooklm.md</span>
+                </div>
+                <div class="terminal-body">
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.5rem, 1.2vh, 1rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">NotebookLM — <span style="color: var(--accent-purple);">tanulótárs AI</span></span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(0.6rem, 1.5vh, 1.2rem);">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1vw, 0.8rem);">
+
+                            <!-- Források -->
+                            <div style="background: rgba(210,168,255,0.06); border: 1px solid rgba(210,168,255,0.15); border-radius: 10px; padding: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.4rem, 1vw, 0.8rem); text-align: center;">
+                                <div style="font-size: clamp(1.2rem, 2.5vw, 1.8rem); margin-bottom: clamp(0.15rem, 0.4vh, 0.3rem);">📂</div>
+                                <div style="font-size: var(--body-size); color: var(--accent-purple); font-weight: 700; margin-bottom: clamp(0.15rem, 0.3vh, 0.25rem);">Források feldolgozása</div>
+                                <div style="font-size: var(--small-size); color: var(--text-secondary); line-height: 1.5;">PDF, dokumentum, weblink, YouTube videó</div>
+                            </div>
+
+                            <!-- Kérdezés -->
+                            <div style="background: rgba(88,166,255,0.06); border: 1px solid rgba(88,166,255,0.15); border-radius: 10px; padding: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.4rem, 1vw, 0.8rem); text-align: center;">
+                                <div style="font-size: clamp(1.2rem, 2.5vw, 1.8rem); margin-bottom: clamp(0.15rem, 0.4vh, 0.3rem);">💬</div>
+                                <div style="font-size: var(--body-size); color: var(--accent-blue); font-weight: 700; margin-bottom: clamp(0.15rem, 0.3vh, 0.25rem);">Kérdezz bármit</div>
+                                <div style="font-size: var(--small-size); color: var(--text-secondary); line-height: 1.5;">Válaszol hivatkozásokkal a forrásaidból</div>
+                            </div>
+
+                            <!-- Tanulás -->
+                            <div style="background: rgba(0,255,204,0.06); border: 1px solid rgba(0,255,204,0.15); border-radius: 10px; padding: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.4rem, 1vw, 0.8rem); text-align: center;">
+                                <div style="font-size: clamp(1.2rem, 2.5vw, 1.8rem); margin-bottom: clamp(0.15rem, 0.4vh, 0.3rem);">📝</div>
+                                <div style="font-size: var(--body-size); color: var(--accent-cyan); font-weight: 700; margin-bottom: clamp(0.15rem, 0.3vh, 0.25rem);">Tanulási segédletek</div>
+                                <div style="font-size: var(--small-size); color: var(--text-secondary); line-height: 1.5;">Útmutató, kérdések, mindmap, kvíz</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">
+                        <div style="display: inline-flex; gap: clamp(0.5rem, 1.5vw, 1.2rem); align-items: center;">
+                            <div style="background: rgba(255,165,87,0.08); border: 1px solid rgba(255,165,87,0.2); border-radius: 8px; padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.6rem, 1.2vw, 1rem); text-align: center;">
+                                <span style="font-size: clamp(1rem, 2vw, 1.5rem);">🎙️</span>
+                                <div style="font-size: var(--small-size); color: var(--accent-orange); font-weight: 700;">Podcast</div>
+                            </div>
+                            <div style="font-size: var(--body-size); color: var(--text-secondary);">+</div>
+                            <div style="background: rgba(255,123,114,0.08); border: 1px solid rgba(255,123,114,0.2); border-radius: 8px; padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.6rem, 1.2vw, 1rem); text-align: center;">
+                                <span style="font-size: clamp(1rem, 2vw, 1.5rem);">🎬</span>
+                                <div style="font-size: var(--small-size); color: var(--accent-red); font-weight: 700;">Videó</div>
+                            </div>
+                            <div style="font-size: var(--small-size); color: var(--text-secondary); text-align: left; max-width: 250px;">generálás a forrásaidból — akár teljes epizódokat is!</div>
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center;">
+                        <a href="https://notebooklm.google.com/notebook/02a8d67f-552b-4895-b138-48b7ef141f72" target="_blank" style="display: inline-flex; align-items: center; gap: clamp(0.4rem, 0.8vw, 0.6rem); background: rgba(227,179,65,0.08); border: 1px solid rgba(227,179,65,0.25); border-radius: 8px; padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.8rem, 1.5vw, 1.2rem); text-decoration: none; transition: background 0.3s;">
+                            <span style="font-size: clamp(1rem, 2vw, 1.4rem);">▶</span>
+                            <span style="font-size: var(--body-size); color: var(--accent-yellow); font-weight: 700;">Demó: Mi történt 1848. március 15-én?</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> notebooklm.google</span>
+                    <span>mode: learn smarter, not harder</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 15: Képfelismerés
+       =========================================== -->
+    <section class="slide slide-vision" data-slide="14">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: -5%; left: 10%;"></div>
+        <div class="orb orb-magenta" style="bottom: -8%; right: -3%;"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 850px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">gemini ~ képfelismerés.sh</span>
+                </div>
+                <div class="terminal-body">
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Képfelismerés — <span style="color: var(--accent-green);">mit lát az AI?</span></span>
+                    </div>
+
+                    <div class="type-line" style="display: flex; gap: clamp(0.8rem, 2vw, 1.5rem); align-items: center; justify-content: center; flex-wrap: wrap;">
+                        <div style="flex-shrink: 0;">
+                            <img src="etel_kep.jpg" alt="Étel kép" style="width: clamp(140px, 25vw, 280px); height: clamp(140px, 25vw, 280px); object-fit: cover; border-radius: 12px; border: 2px solid var(--border-terminal); box-shadow: 0 0 20px rgba(0,255,204,0.1);">
+                        </div>
+                        <div style="text-align: left; max-width: 350px;">
+                            <div style="font-size: var(--body-size); color: var(--text-secondary); margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);">Kérdezzük meg az AI-t:</div>
+                            <div style="background: rgba(0,255,204,0.06); border: 1px solid rgba(0,255,204,0.15); border-radius: 8px; padding: clamp(0.5rem, 1vh, 0.8rem) clamp(0.6rem, 1.2vw, 1rem); margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">
+                                <span style="font-size: var(--code-size); color: var(--accent-cyan); line-height: 1.6;">„Mi van ezen a képen? Milyen ételeket látsz és becsüld meg a kalóriákat!"</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; animation: pulse-glow 2s ease-in-out infinite;">
+                                <span style="font-size: clamp(0.9rem, 1.5vw, 1.2rem);">▶</span>
+                                <span style="font-size: var(--body-size); color: var(--accent-green); font-weight: 700;">Próbáljuk ki Geminivel!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> multimodal-vision</span>
+                    <span>mode: image recognition</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 16: Videó felismerés — YouTube
+       =========================================== -->
+    <section class="slide slide-youtube" data-slide="15">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-magenta" style="top: -6%; left: -4%;"></div>
+        <div class="orb orb-cyan" style="bottom: -5%; right: 8%;"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 850px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">gemini ~ videó_felismerés.sh</span>
+                </div>
+                <div class="terminal-body">
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Videó felismerés — <span style="color: var(--accent-red);">YouTube</span></span>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.5rem, 1.2vh, 1rem);">
+                        <span style="font-size: var(--body-size); color: var(--text-secondary);">Az AI YouTube videókat is képes „megnézni" és értelmezni</span>
+                    </div>
+
+                    <div class="type-line" style="display: flex; gap: clamp(0.8rem, 2vw, 1.5rem); align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: clamp(0.5rem, 1.2vh, 1rem);">
+                        <div style="flex-shrink: 0; position: relative;">
+                            <a href="https://www.youtube.com/watch?v=LNHBMFCzznE" target="_blank" style="display: block; text-decoration: none;">
+                                <img src="https://img.youtube.com/vi/LNHBMFCzznE/mqdefault.jpg" alt="TEDx Talk thumbnail" style="width: clamp(180px, 28vw, 320px); border-radius: 10px; border: 2px solid var(--border-terminal); box-shadow: 0 0 20px rgba(255,123,114,0.15);">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                                    <div style="width: clamp(2.5rem, 5vw, 3.5rem); height: clamp(2.5rem, 5vw, 3.5rem); background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        <span style="color: #fff; font-size: clamp(1rem, 2vw, 1.5rem); margin-left: 3px;">▶</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div style="text-align: left; max-width: 320px;">
+                            <div style="font-size: var(--body-size); color: #fff; font-weight: 700; margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem); line-height: 1.4;">After watching this, your brain will not be the same</div>
+                            <div style="font-size: var(--small-size); color: var(--accent-red); margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);">Lara Boyd | TEDxVancouver</div>
+                            <div style="background: rgba(0,255,204,0.06); border: 1px solid rgba(0,255,204,0.15); border-radius: 8px; padding: clamp(0.4rem, 0.8vh, 0.6rem) clamp(0.5rem, 1vw, 0.8rem);">
+                                <span style="font-size: var(--code-size); color: var(--accent-cyan); line-height: 1.5;">„Foglald össze magyarul a videó legfontosabb tanulságait!"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center;">
+                        <div style="display: inline-flex; align-items: center; gap: 0.4rem; animation: pulse-glow 2s ease-in-out infinite;">
+                            <span style="font-size: clamp(0.9rem, 1.5vw, 1.2rem);">▶</span>
+                            <span style="font-size: var(--body-size); color: var(--accent-green); font-weight: 700;">Próbáljuk ki Geminivel!</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> multimodal-video</span>
+                    <span>mode: video understanding</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================================
+       SLIDE 17: Képgenerálás
+       =========================================== -->
+    <section class="slide slide-imagegen" data-slide="16">
+        <div class="cyber-grid"></div>
+        <div class="orb orb-cyan" style="top: 5%; right: -5%;"></div>
+        <div class="orb orb-magenta" style="bottom: -6%; left: -3%;"></div>
+
+        <div class="slide-content" style="align-items: center;">
+            <div class="terminal" style="max-width: min(90vw, 850px); width: 100%;">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span class="terminal-title">gemini ~ képgenerálás.sh</span>
+                </div>
+                <div class="terminal-body">
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.4rem, 1vh, 0.8rem);">
+                        <span style="font-size: var(--h2-size); font-family: var(--font-display); font-weight: 700; color: #fff;">Képgenerálás — <span style="color: var(--accent-magenta);">Nano Banana 2</span></span>
+                    </div>
+
+                    <div class="type-line" style="text-align: center; margin-bottom: clamp(0.6rem, 1.5vh, 1.2rem);">
+                        <span style="font-size: var(--small-size); color: var(--text-secondary);">Google Nano Banana 2 · elérhető a Gemini appon keresztül</span>
+                    </div>
+
+                    <div class="type-line" style="margin-bottom: clamp(0.5rem, 1.2vh, 1rem);">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.5rem, 1.5vw, 1rem);">
+
+                            <!-- Prompt 1: 1848 anime -->
+                            <div style="background: rgba(255,0,170,0.06); border: 1px solid rgba(255,0,170,0.18); border-radius: 10px; padding: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.6rem, 1.2vw, 1rem);">
+                                <div style="font-size: var(--small-size); color: var(--accent-magenta); font-weight: 700; margin-bottom: clamp(0.2rem, 0.4vh, 0.3rem);">🎨 Kreatív</div>
+                                <div style="background: rgba(0,0,0,0.3); border-radius: 6px; padding: clamp(0.3rem, 0.6vh, 0.5rem) clamp(0.4rem, 0.8vw, 0.6rem); margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                                    <span style="font-size: var(--small-size); color: var(--accent-cyan); line-height: 1.5;">„1848. március 15-e Pesten, anime stílusban. Petőfi a Nemzeti Múzeum lépcsőjén szaval a tömegnek."</span>
+                                </div>
+                                <div style="font-size: clamp(0.55rem, 0.8vw, 0.7rem); color: var(--text-secondary);">Történelem + kreativitás</div>
+                            </div>
+
+                            <!-- Prompt 2: geometria -->
+                            <div style="background: rgba(88,166,255,0.06); border: 1px solid rgba(88,166,255,0.18); border-radius: 10px; padding: clamp(0.5rem, 1.2vh, 0.9rem) clamp(0.6rem, 1.2vw, 1rem);">
+                                <div style="font-size: var(--small-size); color: var(--accent-blue); font-weight: 700; margin-bottom: clamp(0.2rem, 0.4vh, 0.3rem);">📐 Tanulás</div>
+                                <div style="background: rgba(0,0,0,0.3); border-radius: 6px; padding: clamp(0.3rem, 0.6vh, 0.5rem) clamp(0.4rem, 0.8vw, 0.6rem); margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);">
+                                    <span style="font-size: var(--small-size); color: var(--accent-cyan); line-height: 1.5;">„Vizualizáld geometriailag az azonosságot: (a + b)² = a² + 2ab + b². Színes négyzetekkel és téglalapokkal."</span>
+                                </div>
+                                <div style="font-size: clamp(0.55rem, 0.8vw, 0.7rem); color: var(--text-secondary);">Matek vizualizáció</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="type-line" style="text-align: center;">
+                        <div style="display: inline-flex; align-items: center; gap: 0.4rem; animation: pulse-glow 2s ease-in-out infinite;">
+                            <span style="font-size: clamp(0.9rem, 1.5vw, 1.2rem);">▶</span>
+                            <span style="font-size: var(--body-size); color: var(--accent-green); font-weight: 700;">Generáljunk képeket Geminivel!</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="terminal-footer">
+                    <span><span class="status-dot">●</span> nano-banana-2</span>
+                    <span>mode: text-to-image generation</span>
                 </div>
             </div>
         </div>
